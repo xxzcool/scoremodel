@@ -1,0 +1,37 @@
+#' About 20,000 fictional credit records.
+#'
+#' A dataset containing the personal and credit attributes of almost 20,000 fictional
+#'  customers. The variables are as follows:
+#'
+#' \itemize{
+#'   \item gender. gender of customer  (F, M)
+#'   \item marriage. marriage of customer (unmarried, married, divorced)
+#'   \item education. education of customer (primary, middle, high, polytechnic, junior, bachelor)
+#'   \item housing. housing of customer (unit, rent, parents, own)
+#'   \item loanamount. loan amount (500--10800)
+#'   \item loanperiod. period of loan (3--24)
+#'   \item queryid. suspect query reuslt by id number (positive, negative)
+#'   \item queryphone. suspect query reuslt by phone number (positive, negative)
+#'   \item queryhis15d. suspect query history in the last 15 days (positive, negative)
+#'   \item queryhis30d. suspect query history in the last 30 days (positive, negative)
+#'   \item queryhis90d. suspect query history in the last 90 days (positive, negative)
+#'   \item applyflag. whether applied before (0, 1)
+#'   \item multiloantimes. times of multiple loan in the last 12 months (1--31)
+#'   \item purchasingPI. purchasing power index of customer (10--100)
+#'   \item rationalCI. rational consumption index of customer (0--100)
+#'   \item equipmentBI. equipment behavior index of customer (302--848)
+#'   \item transactionRI. transaction risk index of customer (359--818)
+#'   \item consumptionCI. consumption composite index of customer (350--850)
+#'   \item gscore. customer's score graded by credit institution G (443--703)
+#'   \item kscore. customer's score graded by credit institution K (300--850)
+#'   \item bscore. customer's score graded by credit institution B (365--854)
+#'   \item pscore. customer's score graded by credit institution P (304--789)
+#'   \item target. response variable, 1 means bad customer, 0 means good customer (0, 1)
+#' }
+#'
+#' @docType data
+#' @keywords datasets
+#' @name CreditData
+#' @usage data(CreditData)
+#' @format A data frame with 19805 rows and 23 variables
+NULL
