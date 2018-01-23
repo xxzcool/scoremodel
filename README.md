@@ -3,7 +3,16 @@
 
 A set of flexible, efficient and easy to use functions to build a credit scoring model from beginning to end, including dataset reading and preprocessing, variable binning and woe-encoding, model performance and stability validation, as well as visualization.
 
-## Example:
+### Installation
+```R
+install.packages("devtools")
+devtools::install_version("smbinning", version = 0.4)
+devtools::install_github("xxzcool/scoremodel")
+```
+#### Notes:
+This package depends on 'smbinning' prior to version 0.4, so you have to install the specified version of 'smbinning' at first.
+
+### Example:
 ```R
 data(CreditData)
 #convert character variables to factors
