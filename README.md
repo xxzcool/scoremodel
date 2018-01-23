@@ -35,7 +35,7 @@ train_encoding <- cbind(x_train_encoding, train["target"])
 #collinear elimination
 train_encoding_red <- collElimination(train_encoding, cor_critical = 0.8)
 #model training
-fit <- LRfit(train_encoding_red, sig = 0.05)
+fit <- LRfit(train_encoding_red, sig = 0.01)
 #prediction
 p_train <- LRpredict(fit)
 p_test <- LRpredict(fit, newdata = x_test_encoding)
