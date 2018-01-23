@@ -12,7 +12,7 @@ devtools::install_github("xxzcool/scoremodel")
 #### Notes:
 This package depends on 'smbinning' prior to version 0.4, so you have to install the specified version of 'smbinning' at first.
 
-### Example:
+### Example
 ```R
 library(scoremodel)
 data(CreditData)
