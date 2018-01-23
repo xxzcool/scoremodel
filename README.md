@@ -14,6 +14,7 @@ This package depends on 'smbinning' prior to version 0.4, so you have to install
 
 ### Example:
 ```R
+library(scoremodel)
 data(CreditData)
 #convert character variables to factors
 mysample <- convertToFactor(CreditData)
