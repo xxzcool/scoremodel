@@ -18,7 +18,7 @@ library(scoremodel)
 data(CreditData)
 #convert character variables to factors
 mysample <- convertToFactor(CreditData)
-#homogeneity inspect
+#homogeneity exclusion
 mysample <- delNArate(mysample, narate_critical = 0.9)[[3]]
 mysample <- delFewValues(mysample, minN = 5, minF = 2, exclude = "target")
 mysample <- delSinvalPercent(mysample, percent = 0.9, exclude = "target")
