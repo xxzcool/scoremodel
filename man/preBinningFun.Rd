@@ -25,7 +25,7 @@ A list
 \code{preBinningFun} is often used to pre-binning with returning plots and a lots of details for variables filtering, and it has integrated 5 different binning methods(see details). Important notes: the calculated WOE value in this function is the opposite of the actual value.
 }
 \details{
-\code{binMethod=c(1,2,3,4,5)}, meanings:
+\code{binMethod=c(1,2,3,4,5)}, means:
   1 means optimal binning, and equal-frequency binning is an alternative when optimal binning is not available.
   2 means optimal binning, and equal-interval binning is an alternative when optimal binning is not available.
   3 means equal-frequency binning.

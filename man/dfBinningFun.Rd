@@ -24,7 +24,7 @@ A list corresponding to X variables in \code{mydf}
 \code{dfBinningFun} is a wrapper and parallelization of \code{\link{smbinning2}}, so it can generate the woe configuration list by using optimal binning automatically.
 }
 \details{
-woe configuration list is a list object length as number of x variables in \code{mydf}, whose component is a dataframe consisting of two columns, named as 'vals' and 'woe'.
+woe configuration list is a list object lengths as number of x variables in \code{mydf}, whose component is a dataframe consisting of two columns, named as 'vals' and 'woe'.
 }
 \seealso{
 Other dataset binning and woe-encoding functions: \code{\link{convertCutPoints}},

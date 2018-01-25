@@ -27,13 +27,11 @@ Auxiliary function: \code{smbinning2} is an enhanced and integrated optimal binn
 }
 \details{
 the last variable in \code{df} must be binary response variable (0,1). Integer (int) is required. Name of y must not have a dot. Name "default" is not allowed.
-
 \code{binMethod=c(1,2,3,4)}, meanings:
   1 means optimal binning, and equal-frequency binning is an alternative when optimal binning is not available.
   2 means optimal binning, and equal-interval binning is an alternative when optimal binning is not available.
   3 means equal-frequency binning.
   4 means equal-interval binning.
-
 when \code{x} represents a continuous variable: At least 5 different values(excluding NA). Value Inf is not allowed.
 when \code{x} represents a factor variable: At least 2 different values(excluding NA). Value Inf is not allowed.
 }

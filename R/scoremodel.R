@@ -516,13 +516,11 @@ getEqualFreqCuts <- function(x,n) {
 #'
 #' @details
 #' the last variable in \code{df} must be binary response variable (0,1). Integer (int) is required. Name of y must not have a dot. Name "default" is not allowed.
-#'
 #' \code{binMethod=c(1,2,3,4)}, meanings:
 #'   1 means optimal binning, and equal-frequency binning is an alternative when optimal binning is not available.
 #'   2 means optimal binning, and equal-interval binning is an alternative when optimal binning is not available.
 #'   3 means equal-frequency binning.
 #'   4 means equal-interval binning.
-#'
 #' when \code{x} represents a continuous variable: At least 5 different values(excluding NA). Value Inf is not allowed.
 #' when \code{x} represents a factor variable: At least 2 different values(excluding NA). Value Inf is not allowed.
 #'
@@ -679,7 +677,7 @@ smbinning2 <- function(df,x,binMethod,p,maxcat,aliquots) {
 #' \code{dfBinningFun} is a wrapper and parallelization of \code{\link{smbinning2}}, so it can generate the woe configuration list by using optimal binning automatically.
 #'
 #' @details
-#' woe configuration list is a list object length as number of x variables in \code{mydf}, whose component is a dataframe consisting of two columns, named as 'vals' and 'woe'.
+#' woe configuration list is a list object lengths as number of x variables in \code{mydf}, whose component is a dataframe consisting of two columns, named as 'vals' and 'woe'.
 #'
 #' @param mydf A dataframe only with Xs and Y variables, the last column must be Y. All character x variables must be converted to factors in advance.
 #' @param binMethod An integer from 1 to 4, indicates 4 different binning methods(see details \code{\link{smbinning2}}), default \code{1}.
@@ -1663,7 +1661,7 @@ mysmbinning.factor <- function(myx,df) {
 #' \code{preBinningFun} is often used to pre-binning with returning plots and a lots of details for variables filtering, and it has integrated 5 different binning methods(see details). Important notes: the calculated WOE value in this function is the opposite of the actual value.
 #'
 #' @details
-#' \code{binMethod=c(1,2,3,4,5)}, meanings:
+#' \code{binMethod=c(1,2,3,4,5)}, means:
 #'   1 means optimal binning, and equal-frequency binning is an alternative when optimal binning is not available.
 #'   2 means optimal binning, and equal-interval binning is an alternative when optimal binning is not available.
 #'   3 means equal-frequency binning.
