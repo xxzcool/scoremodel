@@ -1,6 +1,6 @@
 ##******author:zhonghongfa******
 ##******create:2017-09-20*******
-##******update:2018-01-22*******
+##******update:2018-01-25*******
 
 #' @title Read Dataset Based on Data-dictionary
 #'
@@ -512,22 +512,23 @@ getEqualFreqCuts <- function(x,n) {
 #' @title Auxiliary Function: Optimally Binning of Given Variable
 #'
 #' @description
-#' Auxiliary function: \code{smbinning2} is an enhanced and integrated optimal binning function for score model, which contains 5 different binning methods(see details) for numeric and factor variables.
+#' Auxiliary function: \code{smbinning2} is an enhanced and integrated optimal binning function for score model, which contains 4 different binning methods(see details) for numeric and factor variables.
 #'
 #' @details
 #' the last variable in \code{df} must be binary response variable (0,1). Integer (int) is required. Name of y must not have a dot. Name "default" is not allowed.
-#' \code{binMethod=c(1,2,3,4,5)}, meanings:
+#'
+#' \code{binMethod=c(1,2,3,4)}, meanings:
 #'   1 means optimal binning, and equal-frequency binning is an alternative when optimal binning is not available.
 #'   2 means optimal binning, and equal-interval binning is an alternative when optimal binning is not available.
 #'   3 means equal-frequency binning.
 #'   4 means equal-interval binning.
-#'   5 means only optimal binning.
+#'
 #' when \code{x} represents a continuous variable: At least 5 different values(excluding NA). Value Inf is not allowed.
 #' when \code{x} represents a factor variable: At least 2 different values(excluding NA). Value Inf is not allowed.
 #'
 #' @param df A dataframe only with Xs and Y variables, and the last variable must be Y, see details.
 #' @param x A name character of one x variable(if x variable is a character variable, it must be converted to factor in advance), \code{x} must not have a dot, see details.
-#' @param binMethod An integer from 1 to 5, indicates 5 different binning methods(see details).
+#' @param binMethod An integer from 1 to 4, indicates 4 different binning methods(see details).
 #' @param p A numeric, means percentage of records per bin, from 0 to 0.5.
 #' @param maxcat An integer, specifies the maximum number of categories.
 #' @param aliquots An integer, specifies the number of bins for equal-frequency or equal-interval binning method.
@@ -681,7 +682,7 @@ smbinning2 <- function(df,x,binMethod,p,maxcat,aliquots) {
 #' woe configuration list is a list object length as number of x variables in \code{mydf}, whose component is a dataframe consisting of two columns, named as 'vals' and 'woe'.
 #'
 #' @param mydf A dataframe only with Xs and Y variables, the last column must be Y. All character x variables must be converted to factors in advance.
-#' @param binMethod An integer from 1 to 5, indicates 5 different binning methods(see details \code{\link{smbinning2}}), default \code{1}.
+#' @param binMethod An integer from 1 to 4, indicates 4 different binning methods(see details \code{\link{smbinning2}}), default \code{1}.
 #' @param p A numeric, means percentage of records per bin, from 0 to 0.5, default \code{0.05}.
 #' @param maxcat An integer, specifies the maximum number of categories, default \code{10}.
 #' @param aliquots An integer, specifies the number of bins for equal-frequency or equal-interval binning method, default \code{5}.
@@ -1572,7 +1573,7 @@ collElimination2 <- function(df,IVdf,cor_critical=0.8) {
 #
 # @param myx A name character of one continuous variable, \code{myx} must not have a dot.
 # @param df A data frame of dataset consisting of only Xs and Y variables, the last column must be Y.
-# @param binMethod An integer from 1 to 5, indicates 5 different binning methods(see details \code{\link{smbinning2}}).
+# @param binMethod An integer from 1 to 5, indicates 5 different binning methods.
 # @param per A numeric, means percentage of records per bin, from 0 to 0.5.
 # @param aliquots An integer, specifies the number of bins for equal-frequency or equal-interval binning method.
 #
@@ -1659,13 +1660,20 @@ mysmbinning.factor <- function(myx,df) {
 #' @title Variable Pre-Binning, then Computing WOE and IV
 #'
 #' @description
-#' \code{preBinningFun} is often used to pre-binning with returning plots and a lots of details for variables filtering, and it also have integrated 5 different binning methods. Important notes: the calculated WOE value in this function is the opposite of the actual value.
+#' \code{preBinningFun} is often used to pre-binning with returning plots and a lots of details for variables filtering, and it has integrated 5 different binning methods(see details). Important notes: the calculated WOE value in this function is the opposite of the actual value.
 #'
 #' @details
+#' \code{binMethod=c(1,2,3,4,5)}, meanings:
+#'   1 means optimal binning, and equal-frequency binning is an alternative when optimal binning is not available.
+#'   2 means optimal binning, and equal-interval binning is an alternative when optimal binning is not available.
+#'   3 means equal-frequency binning.
+#'   4 means equal-interval binning.
+#'   5 means optimal binning only.
+#'
 #' this function will generate four files in current directory, including 'myGraphResult.pdf', 'vars_summary.csv', 'summaryIV.csv' and 'insignificantVars.csv'(if it exists), as well as mass csv files in '~/binCSVResult/' subdirectory. If the subdirectory does not exist, it will be created automatically.
 #'
 #' @param mydata A data frame of dataset consisting of only Xs and Y variables, the last column must be Y. All character x variables must be converted to factors in advance.
-#' @param binMethod An integer from 1 to 5, indicates 5 different binning methods(see details \code{\link{smbinning2}}), default \code{1}.
+#' @param binMethod An integer from 1 to 5, indicates 5 different binning methods(see details), default \code{1}.
 #' @param p A numeric, means percentage of records per bin, from 0 to 0.5, default \code{0.05}.
 #' @param aliquots An integer, specifies the number of bins for equal-frequency or equal-interval binning method, default \code{5}.
 #' @param mydict Optional, default \code{NULL}. File name character of variable dictionary with csv file extension, or a dataframe representing the variable dictionary, see details of this parameter in \code{\link{fread_basedict}}.

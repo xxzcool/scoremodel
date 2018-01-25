@@ -11,7 +11,7 @@ smbinning2(df, x, binMethod, p, maxcat, aliquots)
 
 \item{x}{A name character of one x variable(if x variable is a character variable, it must be converted to factor in advance), \code{x} must not have a dot, see details.}
 
-\item{binMethod}{An integer from 1 to 5, indicates 5 different binning methods(see details).}
+\item{binMethod}{An integer from 1 to 4, indicates 4 different binning methods(see details).}
 
 \item{p}{A numeric, means percentage of records per bin, from 0 to 0.5.}
 
@@ -23,16 +23,17 @@ smbinning2(df, x, binMethod, p, maxcat, aliquots)
 A dataframe with cutpoints and corresponding woes
 }
 \description{
-Auxiliary function: \code{smbinning2} is an enhanced and integrated optimal binning function for score model, which contains 5 different binning methods(see details) for numeric and factor variables.
+Auxiliary function: \code{smbinning2} is an enhanced and integrated optimal binning function for score model, which contains 4 different binning methods(see details) for numeric and factor variables.
 }
 \details{
 the last variable in \code{df} must be binary response variable (0,1). Integer (int) is required. Name of y must not have a dot. Name "default" is not allowed.
-\code{binMethod=c(1,2,3,4,5)}, meanings:
+
+\code{binMethod=c(1,2,3,4)}, meanings:
   1 means optimal binning, and equal-frequency binning is an alternative when optimal binning is not available.
   2 means optimal binning, and equal-interval binning is an alternative when optimal binning is not available.
   3 means equal-frequency binning.
   4 means equal-interval binning.
-  5 means only optimal binning.
+
 when \code{x} represents a continuous variable: At least 5 different values(excluding NA). Value Inf is not allowed.
 when \code{x} represents a factor variable: At least 2 different values(excluding NA). Value Inf is not allowed.
 }

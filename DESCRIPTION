@@ -8,7 +8,7 @@ Description: A set of flexible, efficient and easy to use functions to build a c
 Depends: R (>= 2.10)
 Imports: RColorBrewer, ROCR, caret, data.table, dplyr, ggplot2, gridExtra, pROC, parallel, plotROC, plyr, psych, showtext (>= 0.5), smbinning (<= 0.4), vcd, grDevices, graphics, stats, broom, utils, sysfonts (>= 0.7.1)
 Suggests: devtools, roxygen2, testthat (>= 0.11.0), tidyverse, knitr, rmarkdown, rpart
-License: GPL (>= 2)
+License: GPL (>= 2) | file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1

@@ -9,7 +9,7 @@ dfBinningFun(mydf, binMethod = 1, p = 0.05, maxcat = 10, aliquots = 5)
 \arguments{
 \item{mydf}{A dataframe only with Xs and Y variables, the last column must be Y. All character x variables must be converted to factors in advance.}
 
-\item{binMethod}{An integer from 1 to 5, indicates 5 different binning methods(see details \code{\link{smbinning2}}), default \code{1}.}
+\item{binMethod}{An integer from 1 to 4, indicates 4 different binning methods(see details \code{\link{smbinning2}}), default \code{1}.}
 
 \item{p}{A numeric, means percentage of records per bin, from 0 to 0.5, default \code{0.05}.}
 

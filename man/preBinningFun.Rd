@@ -10,7 +10,7 @@ preBinningFun(mydata, binMethod = 1, p = 0.05, aliquots = 5,
 \arguments{
 \item{mydata}{A data frame of dataset consisting of only Xs and Y variables, the last column must be Y. All character x variables must be converted to factors in advance.}
 
-\item{binMethod}{An integer from 1 to 5, indicates 5 different binning methods(see details \code{\link{smbinning2}}), default \code{1}.}
+\item{binMethod}{An integer from 1 to 5, indicates 5 different binning methods(see details), default \code{1}.}
 
 \item{p}{A numeric, means percentage of records per bin, from 0 to 0.5, default \code{0.05}.}
 
@@ -22,9 +22,16 @@ preBinningFun(mydata, binMethod = 1, p = 0.05, aliquots = 5,
 A list
 }
 \description{
-\code{preBinningFun} is often used to pre-binning with returning plots and a lots of details for variables filtering, and it also have integrated 5 different binning methods. Important notes: the calculated WOE value in this function is the opposite of the actual value.
+\code{preBinningFun} is often used to pre-binning with returning plots and a lots of details for variables filtering, and it has integrated 5 different binning methods(see details). Important notes: the calculated WOE value in this function is the opposite of the actual value.
 }
 \details{
+\code{binMethod=c(1,2,3,4,5)}, meanings:
+  1 means optimal binning, and equal-frequency binning is an alternative when optimal binning is not available.
+  2 means optimal binning, and equal-interval binning is an alternative when optimal binning is not available.
+  3 means equal-frequency binning.
+  4 means equal-interval binning.
+  5 means optimal binning only.
+
 this function will generate four files in current directory, including 'myGraphResult.pdf', 'vars_summary.csv', 'summaryIV.csv' and 'insignificantVars.csv'(if it exists), as well as mass csv files in '~/binCSVResult/' subdirectory. If the subdirectory does not exist, it will be created automatically.
 }
 \seealso{
