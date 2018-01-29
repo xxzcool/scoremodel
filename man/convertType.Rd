@@ -2,7 +2,7 @@
 % Please edit documentation in R/scoremodel.R
 \name{convertType}
 \alias{convertType}
-\title{Convert Variables to Other Types}
+\title{Convert Types of Variables}
 \usage{
 convertType(df, toType, vars = -1)
 }

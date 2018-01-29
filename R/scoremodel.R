@@ -40,7 +40,7 @@ fread_basedict <- function(myfile,mydict,na=c("",".","NA","N/A","NULL"),excludev
 }
 
 
-#' @title Convert Variables to Other Types
+#' @title Convert Types of Variables
 #'
 #' @description
 #' \code{convertType} will convert specified variables in dataset to other types.
@@ -85,26 +85,43 @@ convertType <- function(df,toType,vars=-1) {
     }
   } else if(is.numeric(vars)) {
     if(!all(as.integer(vars) == vars)) stop("parameter 'vars' is float type, not allowed")
-    if(min(vars,na.rm=TRUE) < 1 & vars != -1) stop("the min element in 'vars' is less than 1")
-    if(max(vars,na.rm=TRUE) > ncl) stop("the max element in 'vars' is over the number of dataframe's columns")
-    if(vars == -1) {
-      if(toType == "fac") {
-        df.num <- df[sapply(df,is.numeric)]
-        df.str <- df[!sapply(df,is.numeric)]
-        df.factor <- as.data.frame(sapply(df.str,as.factor))
-        res <- cbind(df.num,df.factor)
-      } else if(toType == "cha") {
-        df.factor <- df[sapply(df,is.factor)]
-        df.unfac <- df[!sapply(df,is.factor)]
-        df.cha <- as.data.frame(sapply(df.factor, as.character), stringsAsFactors = FALSE)
-        res <- cbind(df.unfac,df.cha)
+    if(length(vars) == 1) {
+      if(vars < 1 & vars != -1) stop("parameter 'vars' is less than 1")
+      if(vars > ncl) stop("parameter 'vars' is over the number of dataframe's columns")
+      if(vars == -1) {
+        if(toType == "fac") {
+          df.num <- df[sapply(df,is.numeric)]
+          df.str <- df[!sapply(df,is.numeric)]
+          df.factor <- as.data.frame(sapply(df.str,as.factor))
+          res <- cbind(df.num,df.factor)
+        } else if(toType == "cha") {
+          df.factor <- df[sapply(df,is.factor)]
+          df.unfac <- df[!sapply(df,is.factor)]
+          df.cha <- as.data.frame(sapply(df.factor, as.character), stringsAsFactors = FALSE)
+          res <- cbind(df.unfac,df.cha)
+        } else {
+          df.num <- df[sapply(df,is.numeric)]
+          df.str <- df[!sapply(df,is.numeric)]
+          df.int <- as.data.frame(sapply(df.num, as.integer), stringsAsFactors = FALSE)
+          res <- cbind(df.str,df.int)
+        }
       } else {
-        df.num <- df[sapply(df,is.numeric)]
-        df.str <- df[!sapply(df,is.numeric)]
-        df.int <- as.data.frame(sapply(df.num, as.integer), stringsAsFactors = FALSE)
-        res <- cbind(df.str,df.int)
+        df.spec <- df[vars]
+        df.unspec <- df[-vars]
+        if(toType == "fac") {
+          df.factor <- as.data.frame(sapply(df.spec,as.factor))
+          res <- cbind(df.unspec,df.factor)
+        } else if(toType == "cha") {
+          df.cha <- as.data.frame(sapply(df.spec, as.character), stringsAsFactors = FALSE)
+          res <- cbind(df.unspec,df.cha)
+        } else {
+          df.int <- as.data.frame(sapply(df.spec, as.integer), stringsAsFactors = FALSE)
+          res <- cbind(df.unspec,df.int)
+        }
       }
-    } else {
+    } else if(length(vars) > 1) {
+      if(min(vars,na.rm=TRUE) < 1) stop("the min element in 'vars' is less than 1")
+      if(max(vars,na.rm=TRUE) > ncl) stop("the max element in 'vars' is over the number of dataframe's columns")
       df.spec <- df[vars]
       df.unspec <- df[-vars]
       if(toType == "fac") {
@@ -117,6 +134,8 @@ convertType <- function(df,toType,vars=-1) {
         df.int <- as.data.frame(sapply(df.spec, as.integer), stringsAsFactors = FALSE)
         res <- cbind(df.unspec,df.int)
       }
+    } else {
+      stop("the length of vector 'vars' must be more than or equal to 1")
     }
   } else {
     stop("parameter 'vars' must be an integer or character vector")
