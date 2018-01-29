@@ -37,7 +37,7 @@ when \code{x} represents a factor variable: At least 2 different values(excludin
 }
 \examples{
 data(CreditData)
-mysample <- convertToFactor(CreditData)
+mysample <- convertType(CreditData, toType="fac")
 splitresult <- splitData(mysample, size = 0.7, ifpercent = TRUE)
 train <- splitresult[[1]]
 test <- splitresult[[2]]

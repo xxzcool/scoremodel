@@ -4,12 +4,16 @@
 \alias{psi}
 \title{Compute the PSI Index of Score Model}
 \usage{
-psi(p1, p2)
+psi(p1, p2, bins = 10, binMethod = "EF")
 }
 \arguments{
 \item{p1}{A vector of prediction in train data.}
 
 \item{p2}{A vector of prediction in test data.}
+
+\item{bins}{An integer, set the number of binnings, default \code{10}.}
+
+\item{binMethod}{A character string, specify the binning method, must be one of \code{c("EF","EI")}, "EF" means equal-frequency(default), "EI" means equal-interval.}
 }
 \value{
 A numeric

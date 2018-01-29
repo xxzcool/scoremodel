@@ -1,6 +1,6 @@
 ##******author:zhonghongfa******
 ##******create:2017-09-20*******
-##******update:2018-01-25*******
+##******update:2018-01-29*******
 
 #' @title Read Dataset Based on Data-dictionary
 #'
@@ -40,12 +40,20 @@ fread_basedict <- function(myfile,mydict,na=c("",".","NA","N/A","NULL"),excludev
 }
 
 
-#' @title Convert Character Variables to Factors
+#' @title Convert Variables to Other Types
 #'
 #' @description
-#' \code{convertToFactor} will convert all character variables in dataset to factors.
+#' \code{convertType} will convert specified variables in dataset to other types.
+#'
+#' @details
+#' when \code{vars=-1}, which variables to be converted depends on \code{toType}:
+#' if \code{toType="fac"}, all the character variables will be converted;
+#' if \code{toType="cha"}, all the factor variables will be converted;
+#' if \code{toType="int"}, all the numeric variables will be converted.
 #'
 #' @param df A dataframe to be converted.
+#' @param vars Vector of column names or numbers to convert, \code{-1} means to convert all matched variables based on \code{toType} automatically, see details.
+#' @param toType The type converted to be, values must be one of \code{c("fac","cha","int")}. If \code{toType="int"}, the converted result is intercepting the integer part of specified variable, not rounding.
 #'
 #' @return A new dataframe with the same order of variables
 #' @importFrom dplyr select
@@ -53,14 +61,66 @@ fread_basedict <- function(myfile,mydict,na=c("",".","NA","N/A","NULL"),excludev
 #'
 #' @examples
 #' data(CreditData)
-#' mysample <- convertToFactor(CreditData)
-convertToFactor <- function(df) {
+#' sample_fac <- convertType(CreditData, toType="fac")
+convertType <- function(df,toType,vars=-1) {
   # library(dplyr)
+  ncl <- ncol(df)
   nm <- names(df)
-  df.num <- df[sapply(df,is.numeric)]
-  df.str <- df[!sapply(df,is.numeric)]
-  df.factor <- as.data.frame(sapply(df.str,as.factor))
-  res <- cbind(df.num,df.factor)
+  if(length(toType) != 1) stop("the length of parameter 'toType' must be equal to 1")
+  if(!toType %in% c("fac","cha","int")) stop("parameter 'toType' must be one of c('fac','cha','int')")
+  if(sum(is.na(vars)) > 0) stop("parameter 'vars' contains NA")
+  if(is.character(vars)) {
+    if(sum(!vars %in% nm) > 0) stop(paste(paste(vars[which(!vars %in% nm)],collapse=","),"is not in the variable names of 'df'"))
+    df.spec <- df[vars]
+    df.unspec <- df[!nm %in% vars]
+    if(toType == "fac") {
+      df.factor <- as.data.frame(sapply(df.spec,as.factor))
+      res <- cbind(df.unspec,df.factor)
+    } else if(toType == "cha") {
+      df.cha <- as.data.frame(sapply(df.spec, as.character), stringsAsFactors = FALSE)
+      res <- cbind(df.unspec,df.cha)
+    } else {
+      df.int <- as.data.frame(sapply(df.spec, as.integer), stringsAsFactors = FALSE)
+      res <- cbind(df.unspec,df.int)
+    }
+  } else if(is.numeric(vars)) {
+    if(!all(as.integer(vars) == vars)) stop("parameter 'vars' is float type, not allowed")
+    if(min(vars,na.rm=TRUE) < 1 & vars != -1) stop("the min element in 'vars' is less than 1")
+    if(max(vars,na.rm=TRUE) > ncl) stop("the max element in 'vars' is over the number of dataframe's columns")
+    if(vars == -1) {
+      if(toType == "fac") {
+        df.num <- df[sapply(df,is.numeric)]
+        df.str <- df[!sapply(df,is.numeric)]
+        df.factor <- as.data.frame(sapply(df.str,as.factor))
+        res <- cbind(df.num,df.factor)
+      } else if(toType == "cha") {
+        df.factor <- df[sapply(df,is.factor)]
+        df.unfac <- df[!sapply(df,is.factor)]
+        df.cha <- as.data.frame(sapply(df.factor, as.character), stringsAsFactors = FALSE)
+        res <- cbind(df.unfac,df.cha)
+      } else {
+        df.num <- df[sapply(df,is.numeric)]
+        df.str <- df[!sapply(df,is.numeric)]
+        df.int <- as.data.frame(sapply(df.num, as.integer), stringsAsFactors = FALSE)
+        res <- cbind(df.str,df.int)
+      }
+    } else {
+      df.spec <- df[vars]
+      df.unspec <- df[-vars]
+      if(toType == "fac") {
+        df.factor <- as.data.frame(sapply(df.spec,as.factor))
+        res <- cbind(df.unspec,df.factor)
+      } else if(toType == "cha") {
+        df.cha <- as.data.frame(sapply(df.spec, as.character), stringsAsFactors = FALSE)
+        res <- cbind(df.unspec,df.cha)
+      } else {
+        df.int <- as.data.frame(sapply(df.spec, as.integer), stringsAsFactors = FALSE)
+        res <- cbind(df.unspec,df.int)
+      }
+    }
+  } else {
+    stop("parameter 'vars' must be an integer or character vector")
+  }
   res <- select(res,nm)    #sort the variables
   return(res)
 }
@@ -540,7 +600,7 @@ getEqualFreqCuts <- function(x,n) {
 #'
 #' @examples
 #' data(CreditData)
-#' mysample <- convertToFactor(CreditData)
+#' mysample <- convertType(CreditData, toType="fac")
 #' splitresult <- splitData(mysample, size = 0.7, ifpercent = TRUE)
 #' train <- splitresult[[1]]
 #' test <- splitresult[[2]]
@@ -1078,6 +1138,53 @@ crossValidation <- function(df,t=1,k=10,ifprint=TRUE) {
 }
 
 
+#' @title Auxiliary Function: Insert Elements into Vector
+#'
+#' @description
+#' Auxiliary function: \code{insertElement} can insert specified elements into the specified location of vector, then return a new vector.
+#'
+#' @details
+#' the elements in \code{indexs} must be sorted by ascending.
+#'
+#' @param vec A vector to be inserted into.
+#' @param indexs A vector consisting of location indexs corresponding to the location of new elements after inserted.
+#' @param values A vector to be inserted into parameter \code{vec}.
+#'
+#' @return A vector
+#' @export
+#'
+#' @examples
+#' insertElement(c(6,8,10),c(2,4),c(7,9))
+insertElement <- function(vec,indexs,values) {
+  #limit the mode of 'indexs'
+  if(!is.numeric(indexs)) {
+    stop("parameter 'indexs' must be numeric")
+  } else {
+    indexs2 <- as.integer(indexs)
+    if(!all(indexs == indexs2)) stop("parameter 'indexs' must be integer, float is not allowed")
+  }
+  #check whether the modes of 'vec' and 'values' are consistent
+  if(!is.numeric(vec) | !is.numeric(values)) {
+    if(class(vec) != class(values)) stop("the mode of parameter 'vec' and 'values' must be consistent")
+  }
+
+  len1 <- length(indexs)
+  len2 <- length(values)
+  if(len1 != len2) stop("the lengths of parameter 'indexs' and 'values' must be equal")
+  if(len1 > 0) {
+    for(i in 1:len1) {
+      len <- length(vec)
+      ind <- indexs[i]
+      val <- values[i]
+      if(ind == 1) vec <- c(val,vec)
+      else if(ind > 1 & ind <= len) vec <- c(vec[1:(ind-1)],val,vec[ind:len])
+      else vec <- c(vec,val)
+    }
+  }
+  return(vec)
+}
+
+
 #' @title Compute the PSI Index of Score Model
 #'
 #' @description
@@ -1088,23 +1195,37 @@ crossValidation <- function(df,t=1,k=10,ifprint=TRUE) {
 #'
 #' @param p1 A vector of prediction in train data.
 #' @param p2 A vector of prediction in test data.
+#' @param bins An integer, set the number of binnings, default \code{10}.
+#' @param binMethod A character string, specify the binning method, must be one of \code{c("EF","EI")}, "EF" means equal-frequency(default), "EI" means equal-interval.
 #'
 #' @return A numeric
 #' @family model stability functions
 #' @export
-psi <- function(p1,p2) {
+psi <- function(p1, p2, bins=10, binMethod="EF") {
+  if(!binMethod %in% c("EF","EI")) stop("binMethod must be 'EF' or 'EI'")
+  virtual <- 0.000001    #use a minima to replace zero avoiding calculation of psi failure
+  bin_index <- 1:bins
   n1 <- length(p1)
   n2 <- length(p2)
   p1 <- sort(p1)
   p2 <- sort(p2)
-  min_p1 <- min(p1,na.rm = TRUE)
-  max_p1 <- max(p1,na.rm = TRUE)
-  cutpoints <- seq(min_p1,max_p1,length.out = 10)
-  p1_bin <- cut(p1, cutpoints, labels = FALSE, include.lowest=TRUE)
-  p2_bin <- cut(p2, cutpoints, labels = FALSE, include.lowest=TRUE)
+  min_p <- min(p1, p2, na.rm = TRUE)
+  max_p <- max(p1, p2, na.rm = TRUE)
+  if(binMethod=="EF") {
+    quantpoints <- as.vector(quantile(p1, probs=seq(0, 1, length.out = bins + 1), na.rm=TRUE))
+    cutpoints <- c(min_p, quantpoints[2:(length(quantpoints) - 1)], max_p)
+  } else {
+    cutpoints <- seq(min_p, max_p, length.out = bins + 1)    #if len(cutpoints)=11, number of bins=10
+  }
+  p1_bin <- cut(p1, cutpoints, labels = FALSE, include.lowest = TRUE)
+  p2_bin <- cut(p2, cutpoints, labels = FALSE, include.lowest = TRUE)
+  p1_missbin <- bin_index[!bin_index %in% p1_bin]    #important step
+  p2_missbin <- bin_index[!bin_index %in% p2_bin]    #important step
   p1_group_rate <- as.vector(table(p1_bin))/n1
   p2_group_rate <- as.vector(table(p2_bin))/n2
-  mypsi <- sum((p2_group_rate-p1_group_rate)*log(p2_group_rate/p1_group_rate))
+  if(length(p1_missbin) > 0) p1_group_rate <- insertElement(p1_group_rate,p1_missbin,rep(virtual,length(p1_missbin)))
+  if(length(p2_missbin) > 0) p2_group_rate <- insertElement(p2_group_rate,p2_missbin,rep(virtual,length(p2_missbin)))
+  mypsi <- sum((p2_group_rate - p1_group_rate) * log(p2_group_rate/p1_group_rate))
   return(mypsi)
 }
 
@@ -1668,7 +1789,7 @@ mysmbinning.factor <- function(myx,df) {
 #'   4 means equal-interval binning.
 #'   5 means optimal binning only.
 #'
-#' this function will generate four files in current directory, including 'myGraphResult.pdf', 'vars_summary.csv', 'summaryIV.csv' and 'insignificantVars.csv'(if it exists), as well as mass csv files in '~/binCSVResult/' subdirectory. If the subdirectory does not exist, it will be created automatically.
+#' this function will generate four files in current directory, including 'binGraph.pdf', 'varSummary.csv', 'summaryIV.csv' and 'insignificantVars.csv'(if it exists), as well as mass csv files in '~/binDetails/' subdirectory. If the subdirectory does not exist, it will be created automatically.
 #'
 #' @param mydata A data frame of dataset consisting of only Xs and Y variables, the last column must be Y. All character x variables must be converted to factors in advance.
 #' @param binMethod An integer from 1 to 5, indicates 5 different binning methods(see details), default \code{1}.
@@ -1721,7 +1842,7 @@ preBinningFun <- function(mydata,binMethod=1,p=0.05,aliquots=5,mydict=NULL) {
   cat("Data preparation...Please wait","\n")
   summ <- summary(mydata)
   summ <- t(summ)
-  write.csv(summ,"varsummary.csv",na = "")
+  write.csv(summ,"varSummary.csv",na = "")
 
   mydata[,ncol(mydata)][mydata[,ncol(mydata)] == 0] <- 2
   mydata[,ncol(mydata)][mydata[,ncol(mydata)] == 1] <- 0
@@ -1783,7 +1904,7 @@ preBinningFun <- function(mydata,binMethod=1,p=0.05,aliquots=5,mydict=NULL) {
   opar <- par(no.readonly=TRUE)
   showtext_auto(enable=TRUE)
   font_add("msyh","msyh.ttf")
-  pdf("myGraphResult.pdf")
+  pdf("binGraph.pdf")
   par(family="msyh")
   mypath <- getwd()
   n1 <- 0
@@ -1847,8 +1968,8 @@ preBinningFun <- function(mydata,binMethod=1,p=0.05,aliquots=5,mydict=NULL) {
       }
       insignvar[n2,1] <- varnm_ch
     }
-    if(!dir.exists(paste(mypath,"/binCSVResult/",sep=""))) dir.create(paste(mypath,"/binCSVResult/",sep=""))
-    file=paste(mypath,"/binCSVResult/",varnm_ch,".csv",sep="")
+    if(!dir.exists(paste(mypath,"/binDetails/",sep=""))) dir.create(paste(mypath,"/binDetails/",sep=""))
+    file=paste(mypath,"/binDetails/",varnm_ch,".csv",sep="")
     write.csv(ivtable[[i]],file)
   }
 

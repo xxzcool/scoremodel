@@ -32,7 +32,7 @@ A list
   4 means equal-interval binning.
   5 means optimal binning only.
 
-this function will generate four files in current directory, including 'myGraphResult.pdf', 'vars_summary.csv', 'summaryIV.csv' and 'insignificantVars.csv'(if it exists), as well as mass csv files in '~/binCSVResult/' subdirectory. If the subdirectory does not exist, it will be created automatically.
+this function will generate four files in current directory, including 'binGraph.pdf', 'varSummary.csv', 'summaryIV.csv' and 'insignificantVars.csv'(if it exists), as well as mass csv files in '~/binDetails/' subdirectory. If the subdirectory does not exist, it will be created automatically.
 }
 \seealso{
 Other dataset binning and woe-encoding functions: \code{\link{convertCutPoints}},

@@ -1,7 +1,11 @@
 # scoremodel
 ## Credit scoring modeling toolbox based on R
 
+### Overview
 A set of flexible, efficient and easy to use functions to build a credit scoring model from beginning to end, including dataset reading and preprocessing, variable binning and woe-encoding, model performance and stability validation, as well as visualization.
+
+### News
+01/29/2018 : Optimal function convertType and psi, rename some output file names of function preBinningFun.
 
 ### Installation
 ```R
@@ -12,17 +16,20 @@ devtools::install_github("xxzcool/scoremodel")
 #### Notes:
 This package depends on 'smbinning' prior to version 0.4, so you have to install the specified version of 'smbinning' at first.
 
-### Example
+### Usage
+The following is a demo for illustrating how to use this package to establish a credit scoring model from beginning to end.
+
 ```R
 library(scoremodel)
 data(CreditData)
 #convert character variables to factors
-mysample <- convertToFactor(CreditData)
+mysample <- convertType(CreditData, toType = "fac")
 #homogeneity exclusion
 mysample <- delNArate(mysample, narate_critical = 0.9)[[3]]
 mysample <- delFewValues(mysample, minN = 5, minF = 2, exclude = "target")
 mysample <- delSinvalPercent(mysample, percent = 0.9, exclude = "target")
 #split dataset to train and test
+set.seed(123)
 splitresult <- splitData(mysample, size = 0.7, ifpercent = TRUE)
 train <- splitresult[[1]]
 test <- splitresult[[2]]
@@ -36,6 +43,7 @@ train_encoding <- cbind(x_train_encoding, train["target"])
 train_encoding_red <- collElimination(train_encoding, cor_critical = 0.8)
 #model training
 fit <- LRfit(train_encoding_red, sig = 0.05)
+summary(fit)
 #prediction
 p_train <- LRpredict(fit)
 p_test <- LRpredict(fit, newdata = x_test_encoding)
