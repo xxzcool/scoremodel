@@ -4,8 +4,10 @@
 ### Overview
 A set of flexible, efficient and easy to use functions to build a credit scoring model from beginning to end, including dataset reading and preprocessing, variable binning and woe-encoding, model performance and stability validation, as well as visualization.
 
+
 ### News
 01/29/2018 : Optimal function convertType and psi, rename some output file names of function preBinningFun.
+
 
 ### Installation
 ```R
@@ -16,6 +18,7 @@ devtools::install_github("xxzcool/scoremodel")
 #### Notes:
 This package depends on 'smbinning' prior to version 0.4, so you have to install the specified version of 'smbinning' at first.
 
+
 ### Usage
 The following is a demo for illustrating how to use this package to establish a credit scoring model from beginning to end.
 
@@ -23,7 +26,7 @@ The following is a demo for illustrating how to use this package to establish a 
 library(scoremodel)
 data(CreditData)
 #convert character variables to factors
-mysample <- convertType(CreditData, toType = "fac")
+mysample <- convertType(CreditData, toType = "fac", vars = -1)
 #homogeneity exclusion
 mysample <- delNArate(mysample, narate_critical = 0.9)[[3]]
 mysample <- delFewValues(mysample, minN = 5, minF = 2, exclude = "target")
@@ -51,7 +54,7 @@ p_test <- LRpredict(fit, newdata = x_test_encoding)
 myks(train[,"target"], p_train)
 myks(test[,"target"], p_test)
 #calculate PSI of model
-psi(p_train, p_test)
+psi(p_train, p_test, bins = 10, binMethod = "EF")
 #model performance visualization
 myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = FALSE,
          lift_bins = 10, P0 = 600, PDO = 50, color_scheme = 1, ifsave = FALSE)
