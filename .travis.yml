@@ -8,10 +8,6 @@ cache: packages
 before_install:
   - Rscript -e 'update.packages(ask = FALSE)'
 
-install:
-  - R -e 'install.packages("devtools")'
-  - R -e 'devtools::install_version("smbinning", version = 0.4)'
-
 after_success:
   - Rscript -e 'covr::codecov()'
 
