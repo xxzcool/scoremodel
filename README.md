@@ -62,11 +62,11 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
 
 
 ## Version Records
-scoremodel 0.2.0 2018-01-29  
--   Add an auxiliary function of 'insertElement'.
--   Fix bug of 'psi': add two parameters of bins number and binning method, and set its rate to a minima if the bin is missing for avoiding calculation failure.
--   More flexible of 'convertType': rename function from 'convertToFactor' to 'convertType'. Add two parameter of toType and vars to integrate three types of conversions and be able to specify converted variables.
--   Rename some output files of 'preBinningFun'.
+#### scoremodel 0.2.0 2018-01-29
+- Add an auxiliary function of 'insertElement'.
+- Fix bug of 'psi': add two parameters of bins number and binning method, and set its rate to a minima if the bin is missing for avoiding calculation failure.
+- More flexible of 'convertType': rename function from 'convertToFactor' to 'convertType'. Add two parameter of toType and vars to integrate three types of conversions and be able to specify converted variables.
+- Rename some output files of 'preBinningFun'.
 
-scoremodel 0.1.0 2018-01-22  
--   First release.
+#### scoremodel 0.1.0 2018-01-22
+- First release.
