@@ -1,15 +1,13 @@
 # scoremodel
 ## Credit scoring modeling toolbox based on R
 
-### Overview
+## Overview
+version: 0.2.0
+
 A set of flexible, efficient and easy to use functions to build a credit scoring model from beginning to end, including dataset reading and preprocessing, variable binning and woe-encoding, model performance and stability validation, as well as visualization.
 
 
-### News
-01/29/2018 : Optimal function convertType and psi, rename some output file names of function preBinningFun.
-
-
-### Installation
+## Installation
 ```R
 install.packages("devtools")
 devtools::install_version("smbinning", version = 0.4)
@@ -19,7 +17,7 @@ devtools::install_github("xxzcool/scoremodel")
 This package depends on 'smbinning' prior to version 0.4, so you have to install the specified version of 'smbinning' at first.
 
 
-### Usage
+## Usage
 The following is a demo for illustrating how to use this package to establish a credit scoring model from beginning to end.
 
 ```R
@@ -38,7 +36,7 @@ train <- splitresult[[1]]
 test <- splitresult[[2]]
 #optimal binning and generate woe configuration list
 configlist <- dfBinningFun(train, binMethod = 1, p = 0.05, maxcat = 10, aliquots = 5)
-#woe_encoding
+#woe encoding
 x_train_encoding <- woeEncodeFun_df(train[-length(train)], config_list = configlist)
 x_test_encoding <- woeEncodeFun_df(test[-length(test)], config_list = configlist)
 train_encoding <- cbind(x_train_encoding, train["target"])
@@ -61,3 +59,14 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = FALSE,
 myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
          lift_bins = 10, P0 = 600, PDO = 50, color_scheme = 1, ifsave = FALSE)
 ```
+
+
+## Version Records
+scoremodel 0.2.0 2018-01-29  
+-   Add an auxiliary function of 'insertElement'.
+-   Fix bug of 'psi': add two parameters of bins number and binning method, and set its rate to a minima if the bin is missing for avoiding calculation failure.
+-   More flexible of 'convertType': rename function from 'convertToFactor' to 'convertType'. Add two parameter of toType and vars to integrate three types of conversions and be able to specify converted variables.
+-   Rename some output files of 'preBinningFun'.
+
+scoremodel 0.1.0 2018-01-22  
+-   First release.
