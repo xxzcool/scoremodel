@@ -5,9 +5,11 @@ language: r
 sudo: false
 cache: packages
 
+install:
+  - R -e 'devtools::install_version("smbinning", version = 0.4)'
 
-before_install:
-  - Rscript -e 'update.packages(ask = FALSE)'
+#before_install:
+#  - Rscript -e 'update.packages(ask = FALSE)'
 
 after_success:
   - Rscript -e 'covr::codecov()'
