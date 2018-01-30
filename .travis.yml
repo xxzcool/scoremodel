@@ -5,8 +5,8 @@ language: r
 sudo: false
 cache: packages
 
-#before_install:
-#  - Rscript -e 'update.packages(ask = FALSE)'
+before_install:
+  - Rscript -e 'update.packages(ask = FALSE)'
 
 install:
   - R -e 'install.packages("devtools")'
