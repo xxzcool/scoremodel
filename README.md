@@ -30,7 +30,7 @@ mysample <- delNArate(mysample, narate_critical = 0.9)[[3]]
 mysample <- delFewValues(mysample, minN = 5, minF = 2, exclude = "target")
 mysample <- delSinvalPercent(mysample, percent = 0.9, exclude = "target")
 #split dataset to train and test
-set.seed(123)
+set.seed(21)
 splitresult <- splitData(mysample, size = 0.7, ifpercent = TRUE)
 train <- splitresult[[1]]
 test <- splitresult[[2]]
