@@ -1,5 +1,5 @@
 # scoremodel
-[![Build Status](https://travis-ci.org/xxzcool/scoremodel.svg?branch=master)](https://travis-ci.org/xxzcool/scoremodel) [![GitHub version](https://badge.fury.io/gh/xxzcool%2Fscoremodel.svg)](https://badge.fury.io/gh/xxzcool%2Fscoremodel) [![Open Source Love](https://badges.frapsoft.com/os/gpl/gpl.svg?v=102)](https://github.com/xxzcool/scoremodel) 
+[![Build Status](https://travis-ci.org/xxzcool/scoremodel.svg?branch=master)](https://travis-ci.org/xxzcool/scoremodel) [![GitHub version](https://badge.fury.io/gh/xxzcool%2Fscoremodel.svg)](https://badge.fury.io/for/gh/xxzcool/scoremodel) [![Open Source Love](https://badges.frapsoft.com/os/gpl/gpl.svg?v=102)](https://github.com/xxzcool/scoremodel/blob/master/LICENSE) 
 ## Credit scoring modeling toolbox based on R
 
 
