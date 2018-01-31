@@ -1,6 +1,7 @@
 # scoremodel
-[![Build Status](https://travis-ci.org/xxzcool/scoremodel.svg?branch=master)](https://travis-ci.org/xxzcool/scoremodel)
 ## Credit scoring modeling toolbox based on R
+
+[![Build Status](https://travis-ci.org/xxzcool/scoremodel.svg?branch=master)](https://travis-ci.org/xxzcool/scoremodel)
 
 ## Overview
 version: 0.2.0
