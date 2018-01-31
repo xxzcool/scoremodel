@@ -72,4 +72,4 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
 - Add an auxiliary function of 'insertElement'.
 
 #### scoremodel 0.1.0 2018-01-22
-- First release.
+- Pre-release.
