@@ -5,6 +5,9 @@ language: r
 sudo: true
 cache: packages
 
+r_packages:
+  - covr
+
 before_install:
   - Rscript -e 'update.packages(ask = FALSE)'
 
