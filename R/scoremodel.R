@@ -1,6 +1,6 @@
 ##******author:zhonghongfa******
 ##******create:2017-09-20*******
-##******update:2018-01-29*******
+##******update:2018-02-05*******
 
 #' @title Read Dataset Based on Data-dictionary
 #'
@@ -208,11 +208,14 @@ LRfit <- function(df,sig=0.05) {
   step_fit <- step(fit,direction="both")
   step_df <- tidy(step_fit)
   step_df <- step_df[-1,]
-  step_df <- filter(step_df, p.value<sig & estimate>0)
-  filvars <- step_df[,1]
-  df <- select(df,c(filvars,nm[ncl]))
-  fit_new <- glm(fmla,data=df,family=binomial())
-  return(fit_new)
+  if(max(step_df$p.value) >= sig | min(step_df$estimate) <=0) {
+    step_df <- filter(step_df, p.value < sig & estimate > 0)
+    filvars <- step_df[,1]
+    df <- select(df,c(filvars,nm[ncl]))
+    return(LRfit(df, sig))
+  } else {
+    return(step_fit)
+  }
 }
 
 
