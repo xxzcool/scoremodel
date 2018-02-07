@@ -63,7 +63,7 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
 
 ## Version Records
 #### scoremodel 0.2.1 2018-02-05
-- Fix bug of 'LRfit': add recursive judgment to filter out invalid variables completely.
+- Fix bug of 'LRfit': add recursive judgment to filter out insignificant variables completely.
 
 #### scoremodel 0.2.0 2018-01-31
 - Add an auxiliary function of 'insertElement'.
