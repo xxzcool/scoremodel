@@ -13,7 +13,7 @@ dfIV(df)
 A dataframe contains two columns, one is \code{varname}, another is \code{IV}
 }
 \description{
-\code{dfIV} is a wrapper and parallelization of function \code{\link{sumIV}}, so it can compute the sum IV of every X variable in \code{df}.
+\code{dfIV} is a wrapper of function \code{\link{sumIV}}, so it can compute the sum IV of every X variable in \code{df}.
 }
 \details{
 notice: all the X variables must have been binned in advance, such as after woe-encoded.

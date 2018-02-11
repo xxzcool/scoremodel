@@ -1356,25 +1356,16 @@ maxSinvalPercent_x <- function(df,x_nm) {
 #' @title Get the Max Percents of All Variable's Single-Value
 #'
 #' @description
-#' \code{maxSinvalPercent} is a wrapper and parallelization of auxiliary function \code{maxSinvalPercent_x}, so it will return the max percent vector of every variable's Single-Value in \code{df} at one time.
+#' \code{maxSinvalPercent} is a wrapper of auxiliary function \code{maxSinvalPercent_x}, so it will return the max percent vector of every variable's Single-Value in \code{df} at one time.
 #'
 #' @param df A dataframe.
 #'
 #' @return A vector
 #' @family data preprocessing functions
-#' @importFrom parallel detectCores
-#' @importFrom parallel makeCluster
-#' @importFrom parallel parSapply
-#' @importFrom parallel stopCluster
 #' @export
 maxSinvalPercent <- function(df) {
-  # library(parallel)
   nm <- names(df)
-  clnum <- detectCores()
-  cl <- makeCluster(getOption("cl.cores",clnum))
-  # myres <- parSapply(cl,nm,maxSinvalPercent_x,df=df,USE.NAMES = FALSE)
-  myres <- parSapply(cl,nm,maxSinvalPercent_x,df=df)
-  stopCluster(cl)
+  myres <- sapply(nm,maxSinvalPercent_x,df=df)
   return(myres)
 }
 
@@ -1592,7 +1583,7 @@ sumIV <- function(df,x,totalgood=NULL,totalbad=NULL) {
 #' @title Compute Sum IV of All X Variables
 #'
 #' @description
-#' \code{dfIV} is a wrapper and parallelization of function \code{\link{sumIV}}, so it can compute the sum IV of every X variable in \code{df}.
+#' \code{dfIV} is a wrapper of function \code{\link{sumIV}}, so it can compute the sum IV of every X variable in \code{df}.
 #'
 #' @details
 #' notice: all the X variables must have been binned in advance, such as after woe-encoded.
@@ -1601,21 +1592,12 @@ sumIV <- function(df,x,totalgood=NULL,totalbad=NULL) {
 #'
 #' @return A dataframe contains two columns, one is \code{varname}, another is \code{IV}
 #' @family WOE and IV computing functions
-#' @importFrom parallel detectCores
-#' @importFrom parallel makeCluster
-#' @importFrom parallel clusterEvalQ
-#' @importFrom parallel parSapply
-#' @importFrom parallel stopCluster
 #' @export
 dfIV <- function(df) {
-  # library(parallel)
   ncl <- ncol(df)
   nm <- names(df)
   Xnm <- nm[-ncl]
-  clnum <- detectCores()
-  cl <- makeCluster(getOption("cl.cores",clnum))
-  myIVs <- parSapply(cl,Xnm,sumIV,df=df,USE.NAMES = FALSE)
-  stopCluster(cl)
+  myIVs <- sapply(Xnm,sumIV,df=df,USE.NAMES = FALSE)
   myres <- data.frame(varname=Xnm,IV=myIVs,stringsAsFactors=FALSE)
   return(myres)
 }
