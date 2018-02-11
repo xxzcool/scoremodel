@@ -62,6 +62,9 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
 
 
 ## Version Records
+#### scoremodel 0.3.0 2018-02-11
+- Greatly speed up some functions, including 'delSinvalPercent', 'dfIV' and 'collElimination'.
+
 #### scoremodel 0.2.1 2018-02-05
 - Fix bug of 'LRfit': add recursive judgment to filter out insignificant variables completely.
 
