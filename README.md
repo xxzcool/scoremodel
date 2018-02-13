@@ -62,6 +62,10 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
 
 
 ## Version Records
+#### scoremodel 0.3.1 2018-02-13
+- Speed up remaining ineffective functions, including 'woeEncodeFun_df', 'executeBinFun_df', 'rawPredictFun_df' and 'crossValidation'.
+- Hide four less-used auxiliary functions, including 'woeEncodeFun', 'executeBinFun', 'rawPredictFun', 'maxSinvalPercent_x'.
+
 #### scoremodel 0.3.0 2018-02-11
 - Greatly speed up some functions, including 'delSinvalPercent', 'dfIV' and 'collElimination'.
 
