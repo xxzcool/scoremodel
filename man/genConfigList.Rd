@@ -29,7 +29,6 @@ genConfigList(mysample, cut_list = list("factor",c(534,566,577,617,Inf,NA)))
 Other dataset binning and woe-encoding functions: \code{\link{convertCutPoints}},
   \code{\link{dfBinningFun}},
   \code{\link{executeBinFun_df}},
-  \code{\link{executeBinFun}}, \code{\link{preBinningFun}},
-  \code{\link{smbinning2}}, \code{\link{woeEncodeFun_df}},
-  \code{\link{woeEncodeFun}}
+  \code{\link{preBinningFun}}, \code{\link{smbinning2}},
+  \code{\link{woeEncodeFun_df}}
 }

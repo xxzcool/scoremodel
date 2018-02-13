@@ -25,6 +25,5 @@ generally, in score model, the threshold of single value percent is often set to
 \seealso{
 Other data preprocessing functions: \code{\link{delFewValues}},
   \code{\link{delNArate}}, \code{\link{excludeCol}},
-  \code{\link{maxSinvalPercent_x}},
   \code{\link{maxSinvalPercent}}
 }

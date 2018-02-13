@@ -31,6 +31,5 @@ mysample <- result2[[3]]
 \seealso{
 Other data preprocessing functions: \code{\link{delFewValues}},
   \code{\link{delSinvalPercent}}, \code{\link{excludeCol}},
-  \code{\link{maxSinvalPercent_x}},
   \code{\link{maxSinvalPercent}}
 }

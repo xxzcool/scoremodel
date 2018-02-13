@@ -29,7 +29,6 @@ woe configuration list is a list object lengths as number of x variables in \cod
 \seealso{
 Other dataset binning and woe-encoding functions: \code{\link{convertCutPoints}},
   \code{\link{executeBinFun_df}},
-  \code{\link{executeBinFun}}, \code{\link{genConfigList}},
-  \code{\link{preBinningFun}}, \code{\link{smbinning2}},
-  \code{\link{woeEncodeFun_df}}, \code{\link{woeEncodeFun}}
+  \code{\link{genConfigList}}, \code{\link{preBinningFun}},
+  \code{\link{smbinning2}}, \code{\link{woeEncodeFun_df}}
 }

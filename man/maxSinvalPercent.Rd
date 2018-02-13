@@ -13,11 +13,10 @@ maxSinvalPercent(df)
 A vector
 }
 \description{
-\code{maxSinvalPercent} is a wrapper of auxiliary function \code{maxSinvalPercent_x}, so it will return the max percent vector of every variable's Single-Value in \code{df} at one time.
+\code{maxSinvalPercent} will return the max percent vector of every variable's Single-Value in \code{df}.
 }
 \seealso{
 Other data preprocessing functions: \code{\link{delFewValues}},
   \code{\link{delNArate}}, \code{\link{delSinvalPercent}},
-  \code{\link{excludeCol}},
-  \code{\link{maxSinvalPercent_x}}
+  \code{\link{excludeCol}}
 }

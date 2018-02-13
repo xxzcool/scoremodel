@@ -24,6 +24,5 @@ x_sample <- excludeCol(CreditData, exclude = "target")
 \seealso{
 Other data preprocessing functions: \code{\link{delFewValues}},
   \code{\link{delNArate}}, \code{\link{delSinvalPercent}},
-  \code{\link{maxSinvalPercent_x}},
   \code{\link{maxSinvalPercent}}
 }

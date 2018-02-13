@@ -32,6 +32,5 @@ mysample <- delFewValues(CreditData, minN = 5, minF = 2, exclude = "target")
 \seealso{
 Other data preprocessing functions: \code{\link{delNArate}},
   \code{\link{delSinvalPercent}}, \code{\link{excludeCol}},
-  \code{\link{maxSinvalPercent_x}},
   \code{\link{maxSinvalPercent}}
 }

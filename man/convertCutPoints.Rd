@@ -21,7 +21,6 @@ convertCutPoints(c(10,20,30,Inf,NA))
 \seealso{
 Other dataset binning and woe-encoding functions: \code{\link{dfBinningFun}},
   \code{\link{executeBinFun_df}},
-  \code{\link{executeBinFun}}, \code{\link{genConfigList}},
-  \code{\link{preBinningFun}}, \code{\link{smbinning2}},
-  \code{\link{woeEncodeFun_df}}, \code{\link{woeEncodeFun}}
+  \code{\link{genConfigList}}, \code{\link{preBinningFun}},
+  \code{\link{smbinning2}}, \code{\link{woeEncodeFun_df}}
 }
