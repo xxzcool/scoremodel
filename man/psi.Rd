@@ -24,3 +24,4 @@ A numeric
 \details{
 generally, when PSI < 0.1, model is highly stable; when 0.1-0.25, the stability of model is general; when > 0.25, the stability of model is bad, the model must be rebuilt.
 }
+\concept{model stability functions}

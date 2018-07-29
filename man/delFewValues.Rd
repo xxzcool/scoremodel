@@ -34,3 +34,4 @@ Other data preprocessing functions: \code{\link{delNArate}},
   \code{\link{delSinvalPercent}}, \code{\link{excludeCol}},
   \code{\link{maxSinvalPercent}}
 }
+\concept{data preprocessing functions}

@@ -5,7 +5,8 @@
 \title{Model Performance Visualization}
 \usage{
 myCurves(ytrain, predict_ytrain, ytest, predict_ytest, ontest = TRUE,
-  lift_bins = 10, P0 = 600, PDO = 50, color_scheme = 1, ifsave = TRUE)
+  lift_bins = 10, P0 = 600, PDO = 50, color_scheme = 1,
+  ifsave = TRUE)
 }
 \arguments{
 \item{ytrain}{A vector corresponding the response variable encoded with 0 and 1 of train set.}
@@ -38,3 +39,4 @@ the result graph has four subgraphs which constitute a matrix, top left is ROC C
 Other model performance functions: \code{\link{Curve_Data}},
   \code{\link{crossValidation}}, \code{\link{myks}}
 }
+\concept{model performance functions}

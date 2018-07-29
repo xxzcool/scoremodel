@@ -25,3 +25,4 @@ for collinearity elimination, recursion is necessary to avoid mistakenly-deleted
 \seealso{
 Other collinearity elimination functions: \code{\link{collElimination}}
 }
+\concept{collinearity elimination functions}

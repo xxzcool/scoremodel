@@ -28,3 +28,4 @@ this function will cost much time if you set \code{t} and \code{k} too large, \c
 Other model performance functions: \code{\link{Curve_Data}},
   \code{\link{myCurves}}, \code{\link{myks}}
 }
+\concept{model performance functions}

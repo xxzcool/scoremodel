@@ -41,3 +41,4 @@ Other dataset binning and woe-encoding functions: \code{\link{convertCutPoints}}
   \code{\link{genConfigList}}, \code{\link{smbinning2}},
   \code{\link{woeEncodeFun_df}}
 }
+\concept{dataset binning and woe-encoding functions}

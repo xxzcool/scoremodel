@@ -20,3 +20,4 @@ Other data preprocessing functions: \code{\link{delFewValues}},
   \code{\link{delNArate}}, \code{\link{delSinvalPercent}},
   \code{\link{excludeCol}}
 }
+\concept{data preprocessing functions}

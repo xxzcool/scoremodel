@@ -27,3 +27,4 @@ Other dataset binning and woe-encoding functions: \code{\link{convertCutPoints}}
   \code{\link{genConfigList}}, \code{\link{preBinningFun}},
   \code{\link{smbinning2}}
 }
+\concept{dataset binning and woe-encoding functions}

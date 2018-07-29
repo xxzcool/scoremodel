@@ -62,6 +62,10 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
 
 
 ## Version Records
+#### scoremodel 0.3.2 2018-07-29
+- Fix bug of 'convertType': Beforehand check if there is at least one variable can be converted to avoid errors.
+- Fix bug of 'LRfit': Adaptable update with dependency package 'broom' to avoid errors.
+
 #### scoremodel 0.3.1 2018-02-22
 - Speed up four functions, including 'woeEncodeFun_df', 'executeBinFun_df', 'rawPredictFun_df' and 'crossValidation'.
 - No longer export four less-used auxiliary functions, including 'woeEncodeFun', 'executeBinFun', 'rawPredictFun', 'maxSinvalPercent_x'.

@@ -33,3 +33,4 @@ getIV(CreditData[c("gscore","target")], cutbound = NA)
 Other WOE and IV computing functions: \code{\link{dfIV}},
   \code{\link{getWOE}}, \code{\link{sumIV}}
 }
+\concept{WOE and IV computing functions}

@@ -22,3 +22,4 @@ notice: all the X variables must have been binned in advance, such as after woe-
 Other WOE and IV computing functions: \code{\link{getIV}},
   \code{\link{getWOE}}, \code{\link{sumIV}}
 }
+\concept{WOE and IV computing functions}

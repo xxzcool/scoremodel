@@ -33,3 +33,4 @@ Other data preprocessing functions: \code{\link{delFewValues}},
   \code{\link{delSinvalPercent}}, \code{\link{excludeCol}},
   \code{\link{maxSinvalPercent}}
 }
+\concept{data preprocessing functions}

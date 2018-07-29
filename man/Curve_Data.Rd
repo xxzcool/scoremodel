@@ -26,3 +26,4 @@ the returned list contains two components: a \code{df} 'data.frame(Quant, PropBa
 Other model performance functions: \code{\link{crossValidation}},
   \code{\link{myCurves}}, \code{\link{myks}}
 }
+\concept{model performance functions}

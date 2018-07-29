@@ -28,3 +28,4 @@ parameter \code{theta0} must be the bad:good of train at any time.
 Other model prediction functions: \code{\link{LRpredict}},
   \code{\link{rawPredictFun_df}}
 }
+\concept{model prediction functions}

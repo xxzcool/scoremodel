@@ -24,3 +24,4 @@ Other dataset binning and woe-encoding functions: \code{\link{dfBinningFun}},
   \code{\link{genConfigList}}, \code{\link{preBinningFun}},
   \code{\link{smbinning2}}, \code{\link{woeEncodeFun_df}}
 }
+\concept{dataset binning and woe-encoding functions}

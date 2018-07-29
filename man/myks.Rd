@@ -21,3 +21,4 @@ A numeric
 Other model performance functions: \code{\link{Curve_Data}},
   \code{\link{crossValidation}}, \code{\link{myCurves}}
 }
+\concept{model performance functions}

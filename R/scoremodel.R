@@ -1,6 +1,6 @@
 ##******author:zhonghongfa******
 ##******create:2017-09-20*******
-##******update:2018-02-05*******
+##******update:2018-07-29*******
 
 #' @title Read Dataset Based on Data-dictionary
 #'
@@ -90,16 +90,19 @@ convertType <- function(df,toType,vars=-1) {
       if(vars > ncl) stop("parameter 'vars' is over the number of dataframe's columns")
       if(vars == -1) {
         if(toType == "fac") {
+          if(sum(!sapply(df,is.numeric)) == 0) stop("no character variables can be converted to factors")
           df.num <- df[sapply(df,is.numeric)]
           df.str <- df[!sapply(df,is.numeric)]
           df.factor <- as.data.frame(sapply(df.str,as.factor))
           res <- cbind(df.num,df.factor)
         } else if(toType == "cha") {
+          if(sum(!sapply(df,is.factor)) == 0) stop("no factors can be converted to character variables")
           df.factor <- df[sapply(df,is.factor)]
           df.unfac <- df[!sapply(df,is.factor)]
           df.cha <- as.data.frame(sapply(df.factor, as.character), stringsAsFactors = FALSE)
           res <- cbind(df.unfac,df.cha)
         } else {
+          if(sum(sapply(df,is.numeric)) == 0) stop("no numeric variables can be converted to integer variables")
           df.num <- df[sapply(df,is.numeric)]
           df.str <- df[!sapply(df,is.numeric)]
           df.int <- as.data.frame(sapply(df.num, as.integer), stringsAsFactors = FALSE)
@@ -264,7 +267,7 @@ LRpredict <- function(fit,newdata=NULL) {
   if(is.null(newdata)) {
     p <- predict(fit,type="response")
   } else {
-    fit_df <- tidy(fit)
+    fit_df <- as.data.frame(tidy(fit), stringsAsFactors = FALSE)
     filvars <- fit_df[-1,1]
     newdata <- newdata[filvars]
     p <- predict(fit,newdata=newdata,type="response")
