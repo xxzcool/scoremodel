@@ -18,7 +18,7 @@ This package depends on 'smbinning' prior to version 0.4, so you have to install
 
 
 ## Usage
-The following is a demo for illustrating how to use this package to establish a credit scoring model from beginning to end. You can run the following codes manually, or use 'demo(scoremodel,package="scoremodel")' directly.
+The following is a demo for illustrating how to use this package to establish a credit scoring model from beginning to end. You can run the following codes manually, or use demo(scoremodel,package="scoremodel") directly.
 
 ```R
 library(scoremodel)
