@@ -21,6 +21,10 @@ This package depends on 'smbinning' prior to version 0.4, so you have to install
 The following is a demo for illustrating how to use this package to establish a credit scoring model from beginning to end.
 
 ```R
+demo(scoremodel)
+
+#****Or run the following codes directly***
+
 library(scoremodel)
 data(CreditData)
 #convert character variables to factors
