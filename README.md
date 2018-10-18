@@ -18,13 +18,9 @@ This package depends on 'smbinning' prior to version 0.4, so you have to install
 
 
 ## Usage
-The following is a demo for illustrating how to use this package to establish a credit scoring model from beginning to end.
+The following is a demo for illustrating how to use this package to establish a credit scoring model from beginning to end. You can run the following codes manually, or use 'demo(scoremodel)' directly.
 
 ```R
-demo(scoremodel)
-
-#****Or run the following codes directly***
-
 library(scoremodel)
 data(CreditData)
 #convert character variables to factors
@@ -72,7 +68,7 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
 
 #### scoremodel 0.3.2 2018-07-29
 - Fix bug of 'convertType': check beforehand if there is at least one variable which can be converted to avoid errors.
-- Fix bug of 'LRfit': Adaptable update with dependency package 'broom' to avoid errors.
+- Fix bug of 'LRfit': adaptable update with dependency package 'broom' to avoid errors.
 
 #### scoremodel 0.3.1 2018-02-22
 - Speed up four functions, including 'woeEncodeFun_df', 'executeBinFun_df', 'rawPredictFun_df' and 'crossValidation'.
