@@ -2,6 +2,7 @@
 ## Demo file for scoremodel; start with 'demo(scoremodel)'
 ## -----------------------------------------------------------------------------------
 
+devAskNewPage(ask	=	FALSE)
 library(scoremodel)
 data(CreditData)
 #convert character variables to factors
@@ -39,3 +40,4 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = FALSE,
          lift_bins = 10, P0 = 600, PDO = 50, color_scheme = 1, ifsave = FALSE)
 myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
          lift_bins = 10, P0 = 600, PDO = 50, color_scheme = 1, ifsave = FALSE)
+devAskNewPage(ask	=	TRUE)
