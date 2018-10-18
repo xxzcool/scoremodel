@@ -62,8 +62,12 @@ myCurves(train[,"target"], p_train, test[,"target"], p_test, ontest = TRUE,
 
 
 ## Version Records
+#### scoremodel 0.4.0 2018-10-18
+- Fix bug of 'preBinningFun': if font file 'msyh.ttf' does not exist in current system, then try to use 'msyh.ttc' file.
+- Add a demo to the package.
+
 #### scoremodel 0.3.2 2018-07-29
-- Fix bug of 'convertType': Beforehand check if there is at least one variable can be converted to avoid errors.
+- Fix bug of 'convertType': check beforehand if there is at least one variable which can be converted to avoid errors.
 - Fix bug of 'LRfit': Adaptable update with dependency package 'broom' to avoid errors.
 
 #### scoremodel 0.3.1 2018-02-22
