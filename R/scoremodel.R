@@ -1,6 +1,6 @@
 ##******author:zhonghongfa******
 ##******create:2017-09-20*******
-##******update:2018-07-29*******
+##******update:2018-10-18*******
 
 #' @title Read Dataset Based on Data-dictionary
 #'
@@ -1921,7 +1921,7 @@ preBinningFun <- function(mydata,binMethod=1,p=0.05,aliquots=5,mydict=NULL) {
 
   opar <- par(no.readonly=TRUE)
   showtext_auto(enable=TRUE)
-  font_add("msyh","msyh.ttf")
+  tryCatch(font_add("msyh","msyh.ttf"),error=function(e) {font_add("msyh","msyh.ttc")})
   pdf("binGraph.pdf")
   par(family="msyh")
   mypath <- getwd()
